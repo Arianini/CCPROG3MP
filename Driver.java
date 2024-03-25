@@ -1,21 +1,12 @@
-import java.util.Scanner;
+import javax.swing.SwingUtilities;
 
 public class Driver {
-    public static final Scanner scanner = new Scanner(System.in);
-    private static TitleScreen titleScreen = new TitleScreen();
-    private static CharacterCreation characterCreation;
-    
     public static void main(String[] args) {
-        titleScreen.screenDisplay();
-    }
-
-    public static void characterCreation() {
-        characterCreation = new CharacterCreation();
-        characterCreation.createCharacter();
-    }
-    public static void gameLobby() {
-        GameLobby gameLobby = new GameLobby(characterCreation);
-        gameLobby.enterLobby();
-        
+        SwingUtilities.invokeLater(() -> {
+            TitleScreenView view = new TitleScreenView();
+            CharacterModel model = new CharacterModel();
+            TitleScreenController titleScreenController = new TitleScreenController(view, model);
+            titleScreenController.showTitleScreen();
+        });
     }
 }
