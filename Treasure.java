@@ -1,22 +1,20 @@
-
 import java.util.Random;
 
 public class Treasure {
-    private int areaIndex;
-    private int runeGained;
+    private int runes;
 
-    public Treasure(){
-        this.areaIndex = areaIndex;
-        this.runeGained = 0;
-        
+    public Treasure() {
+        this.runes = 0;
     }
-    public int runesGained(int areaIndex){
+
+    public int runesGained(int areaIndex) {
         Random rand = new Random();
-        int randTreasure = rand.nextInt(3) + 1;
-        runeGained = areaIndex * randTreasure;
-        System.out.println("YOU HAVE RECEIVED " +runeGained+ "RUNES");
-        return runeGained;
-        
+        int minRunes = 50;
+        int maxRunes = 150;
+        this.runes = rand.nextInt(maxRunes - minRunes + 1) + minRunes;
+        this.runes *= areaIndex;
+        System.out.println("You have received " + this.runes + " runes.");
+        return this.runes;
     }
-
+    
 }

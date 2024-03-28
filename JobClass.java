@@ -1,9 +1,4 @@
 public abstract class JobClass {
-    /**
-     *
-     *
-     *
-     */
     protected Stats stats;
 
     public abstract void displayStats();

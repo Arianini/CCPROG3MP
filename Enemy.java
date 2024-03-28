@@ -1,71 +1,60 @@
-
 import java.util.Random;
 
-public class Enemy{
+public class Enemy {
     private int enemyType;
     private String enemyName;
-    private int areaIndex;
+    private int baseHealth;
+    private int baseAttack;
+    private double physicalDefense;
+    private double sorceryDefense;
+    private double incantationDefense;
 
-    public Enemy(){
-        this.enemyType = 0;
-        this.enemyName = null;
-        this.areaIndex = areaIndex;
-    }
-
-    public int getEnemyType(){
-        return this.enemyType;
-    }
-    public String getEnemyName(){
-        return this.enemyName;
-    }
- 
-    public void generateEnemyType(int areaIndex){
+    public Enemy(int areaIndex) {
         Random rand = new Random();
-        int randEnemyType = rand.nextInt(3) + 1;
+        this.enemyType = rand.nextInt(3) + 1; // Random enemy type between 1 and 3
+        
+        generateEnemyType(areaIndex);
+    }
 
-        if(areaIndex == 1)
-        {
-            if(randEnemyType == 1)
-            {
-                enemyType = 1;
-                enemyName = "GODRICK SOLDIER";
-                System.out.println("--- A "+getEnemyName()+"  HAS APPEARED ---");
-                System.out.println("------- "+getEnemyName()+" -------");
-                System.out.println("STATISTICS          LOW     HIGH");
-                System.out.println("HEALTH              20      30");
-                System.out.println("ATTACK              70      80");
-                System.out.println("PHYSICAL DEFENSE       0.20   ");
-                System.out.println("SORCERY DEFENSE        0.15   ");
-                System.out.println("INCANTATION DEFENSE    0.10   ");
-    
-            }else if(randEnemyType == 2)
-            {
-                enemyType = 2;
-                enemyName = "GODRICK ARCHER";
-                System.out.println("--- A "+getEnemyName()+"  HAS APPEARED ---");
-                System.out.println("------- "+getEnemyName()+" -------");
-                System.out.println("STATISTICS          LOW     HIGH");
-                System.out.println("HEALTH              25       35 ");
-                System.out.println("ATTACK              110      120");
-                System.out.println("PHYSICAL DEFENSE       0.50   ");
-                System.out.println("SORCERY DEFENSE        0.15   ");
-                System.out.println("INCANTATION DEFENSE    0.20   ");
-            }
-            else if(randEnemyType == 3)
-            {
-                enemyType = 3;
-                enemyName = "GODRICK KNIGHT";
-                System.out.println("--- A "+getEnemyName()+"  HAS APPEARED ---");
-                System.out.println("------- "+getEnemyName()+" -------");
-                System.out.println("STATISTICS          LOW     HIGH");
-                System.out.println("HEALTH              70      80");
-                System.out.println("ATTACK              120      130");
-                System.out.println("PHYSICAL DEFENSE       0.25   ");
-                System.out.println("SORCERY DEFENSE        0.25   ");
-                System.out.println("INCANTATION DEFENSE    0.20   ");
-            }
+    public void generateEnemyType(int areaIndex) {
+        switch (this.enemyType) {
+            case 1:
+                this.enemyName = "Godrick Soldier";
+                this.baseHealth = 20 + new Random().nextInt(11); // Random between 20-30
+                this.baseAttack = 70 + new Random().nextInt(11); // Random between 70-80
+                this.physicalDefense = 0.2;
+                this.sorceryDefense = 0.15;
+                this.incantationDefense = 0.1;
+                break;
+            case 2:
+                this.enemyName = "Godrick Archer";
+                this.baseHealth = 25 + new Random().nextInt(11); // Random between 25-35
+                this.baseAttack = 110 + new Random().nextInt(11); // Random between 110-120
+                this.physicalDefense = 0.5;
+                this.sorceryDefense = 0.15;
+                this.incantationDefense = 0.2;
+                break;
+            case 3:
+                this.enemyName = "Godrick Knight";
+                this.baseHealth = 70 + new Random().nextInt(11); // Random between 70-80
+                this.baseAttack = 120 + new Random().nextInt(11); // Random between 120-130
+                this.physicalDefense = 0.25;
+                this.sorceryDefense = 0.25;
+                this.incantationDefense = 0.2;
+                break;
+            default:
+                // Default stats or throw an exception if the type is unknown
+                throw new IllegalStateException("Unknown enemy type: " + this.enemyType);
         }
     }
 
+    // Getters for enemy properties
+    public int getEnemyType() {
+        return enemyType;
+    }
 
+    public String getEnemyName() {
+        return enemyName;
+    }
+    
 }
