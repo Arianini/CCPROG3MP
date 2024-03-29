@@ -51,9 +51,10 @@ public class Stats {
         return dex;
     }
 
-    public int getintel() {
+    public int getInt() {
         return intel;
     }
+
     public int getEnd() {
         return end;
     }
