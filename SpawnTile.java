@@ -1,106 +1,40 @@
-import java.util.ArrayList;
 import java.util.Random;
+import java.awt.Color;
 
-public class SpawnTile extends Tile{
-    private int areaIndex;
-    private char spawnTileSymbol;
-    private int spawnTileXcoor;
-    private int spawnTileYcoor;
-    private boolean isSpawnTile;
-    private boolean isSpawnType;
+public class SpawnTile extends Tile {
     private boolean isDisabled;
-    private Enemy enemy;
-    private Treasure treasure;
+    private Random random = new Random();
 
-    public SpawnTile(int areaIndex, char spawnTileSymbol, int spawnTileXcoor, int spawnTileYcoor)
-    {
-        super(spawnTileSymbol, spawnTileXcoor, spawnTileYcoor);
-        this.areaIndex = areaIndex;
-        this.spawnTileSymbol = spawnTileSymbol;
-        this.spawnTileXcoor = spawnTileXcoor;
-        this.spawnTileYcoor = spawnTileYcoor;
-        this.isSpawnTile = true;
-        this.isSpawnType = SpawnType();
+    public SpawnTile() {
+        super(false);
         this.isDisabled = false;
-
-        /*this.enemyType = 0;
-        this.enemyName = enemyName;
-        this.runeGained = 0;*/
     }
-    public void addTiletoList(ArrayList<ArrayList<Tile>> tilesList){
-        if (tilesList != null && tilesList.size() > spawnTileXcoor && tilesList.get(spawnTileXcoor).size() > spawnTileYcoor) {
-            tilesList.get(spawnTileXcoor).set(spawnTileYcoor, new SpawnTile(areaIndex, spawnTileSymbol, spawnTileXcoor, spawnTileYcoor));
-        } else {
-            System.out.println("Invalid tilesList dimensions.");
+
+    @Override
+    public Color getColor() {
+        return isDisabled ? Color.BLACK : Color.CYAN;
+    }
+
+    @Override
+    public void interact(Floor1StormController controller) {
+        if (!isDisabled) {
+            int chance = random.nextInt(100);
+            if (chance < 75) {
+                // There's a 75% chance to spawn an enemy
+                controller.spawnEnemy();
+            } else {
+                // There's a 25% chance to spawn treasure
+                controller.spawnTreasure();
+            }
+            isDisabled = true; // Disable this tile so it cannot be interacted with again
         }
     }
 
-    public boolean isSpawnTile()
-    {
-        return this.isSpawnTile;
+    public void reset() {
+        isDisabled = false;
     }
 
-    public void disableSpawn()
-    {
-        this.isDisabled = true;
+    public boolean isDisabled() {
+        return isDisabled;
     }
-    public boolean SpawnType()
-    {
-        Random rand = new Random();
-        int spawnRandom = rand.nextInt(100) + 1;
-
-        if(spawnRandom <= 75){
-            //disableSpawn();
-            return true;
-        }
-        else
-        {
-            //disableSpawn();
-            return false;
-        }
-    }
-
-    public void interactSpawn()
-    {
-        if (isEnemy())
-        {
-            Enemy enemy = new Enemy();
-            enemy.generateEnemyType(areaIndex);
-            
-        }
-        else if(isTreasure())
-        {
-            Treasure treasure = new Treasure();
-            treasure.runesGained(areaIndex);
-            
-        }
-    }
-
-
-    public char getspawnTileSymbol(){
-        return this.spawnTileSymbol;
-    }
-
-    public int getspawnTileXcoor()
-    {
-        return this.spawnTileXcoor;
-    }
-
-    public int getspawnTileYcoor()
-    {
-        return this.spawnTileYcoor;
-    }
-
-    public boolean isEnemy()
-    {
-        return isSpawnType;
-    }
-
-    public boolean isTreasure(){
-        return !isSpawnType;
-    }
-
-    }
-
-
-
+}
