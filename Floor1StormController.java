@@ -4,14 +4,18 @@ import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-public class Floor1StormController {
+public class Floor1StormController{
     private Floor1StormModel model;
     private Floor1StormView view;
     private GameLobbyController gameLobbyController;
+    //private CharacterModel Cmodel;
+    private Floor2StormController floor2StormController;
+    
 
-    public Floor1StormController(Floor1StormModel model, Floor1StormView view, GameLobbyController gameLobbyController) {
+    public Floor1StormController(Floor1StormModel model, Floor1StormView view, GameLobbyController gameLobbyController, Floor2StormController floor2StormController) {
         this.model = model;
         this.gameLobbyController = gameLobbyController;
+        this.floor2StormController = floor2StormController;
         
         if (view == null) {
             this.view = new Floor1StormView(model, this);
@@ -44,7 +48,7 @@ public class Floor1StormController {
             this.view.setVisible(true);
         });
     }
-    
+  
     private void handleKeyPressed(KeyEvent e) {
         int newRow = model.getPlayerRow();
         int newCol = model.getPlayerColumn();
@@ -73,6 +77,20 @@ public class Floor1StormController {
     
     public void handleDoorInteraction() {
         JOptionPane.showMessageDialog(null, "Going to Floor2");
+        SwingUtilities.invokeLater(() -> {
+            Floor2StormModel floor2StormModel = new Floor2StormModel();
+            Floor2StormView floor2StormView = new Floor2StormView(floor2StormModel, null);
+    
+            Floor2StormController floor2StormController = new Floor2StormController(floor2StormModel, floor2StormView, this);
+    
+            floor2StormView.setController(floor2StormController);
+    
+            CharacterModel character = this.model.getCharacterModel();
+    
+            floor2StormController.startFloor2(character);
+    
+            this.view.setVisible(false);
+        });
     }
 
     public void spawnEnemy() {
@@ -95,5 +113,13 @@ public class Floor1StormController {
 
     public int getAreaIndex() {
         return 1;
+    }
+
+    public void showFloor1() {
+        if (view == null) {
+            view = new Floor1StormView(model, this);
+        }
+
+        view.setVisible(true);
     }
 }

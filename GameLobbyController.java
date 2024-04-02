@@ -21,7 +21,7 @@ public class GameLobbyController {
         view.getInventoryButton().addActionListener(e -> openInventory());
         view.getShopButton().addActionListener(e -> openShop());
         view.getQuitButton().addActionListener(e -> quitGame());
-    }
+    } 
 
     public void showGameLobby() {
         if (view.isVisible()) {
@@ -38,8 +38,8 @@ public class GameLobbyController {
             floor1StormModel.setCharacterModel(model);
             floor1StormModel.resetTiles(); // Reset tiles before starting
             SpawnTile spawnTile = new SpawnTile();
-
-            new Floor1StormController(floor1StormModel, null, this);
+            
+            new Floor1StormController(floor1StormModel, null, this, null);
             view.setVisible(false); // Hide the lobby view
         });
     }
@@ -63,7 +63,7 @@ public class GameLobbyController {
         SwingUtilities.invokeLater(() -> {
             ShopView shopView = new ShopView();
             ShopController shopController = new ShopController(shopView, model);
-            shopView.displayWeapons(getWeaponsForSale());
+            //shopView.displayWeapons(getWeaponsForSale());
             shopView.setVisible(true);
         });
     }

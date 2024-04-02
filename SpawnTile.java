@@ -30,6 +30,21 @@ public class SpawnTile extends Tile {
         }
     }
 
+    @Override
+    public void interact(Floor2StormController controller2) {
+        if (!isDisabled) {
+            int chance = random.nextInt(100);
+            if (chance < 75) {
+                // There's a 75% chance to spawn an enemy
+                controller2.spawnEnemy();
+            } else {
+                // There's a 25% chance to spawn treasure
+                controller2.spawnTreasure();
+            }
+            isDisabled = true; // Disable this tile so it cannot be interacted with again
+        }
+    }
+
     public void reset() {
         isDisabled = false;
     }

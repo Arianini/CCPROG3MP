@@ -14,4 +14,8 @@ public class DoorTile extends Tile {
     public void interact(Floor1StormController controller) {
         controller.handleDoorInteraction();
     }
+
+    public void interact(Floor2StormController controller2) {
+        controller2.handleDoorInteraction();
+    }
 }

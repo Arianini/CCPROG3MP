@@ -356,7 +356,7 @@ public class ShopView extends JFrame{
         setVisible(true);
     }
 
-    public void displayWeapons(List<Weapon> weapons) {
+   /* public void displayWeapons(List<Weapon> weapons) {
         panel.removeAll();
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -379,7 +379,7 @@ public class ShopView extends JFrame{
         }
         panel.revalidate();
         panel.repaint();
-    }
+    }*/ 
 
 
     public void addBuybutton(ActionListener listener){

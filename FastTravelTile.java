@@ -14,4 +14,7 @@ public class FastTravelTile extends Tile {
     public void interact(Floor1StormController controller) {
         controller.handleFastTravel();
     }
+    public void interact(Floor2StormController controller) {
+        //Do nothing
+    }
 }

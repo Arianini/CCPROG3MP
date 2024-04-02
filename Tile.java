@@ -18,4 +18,5 @@ public abstract class Tile {
     public abstract Color getColor();
 
     public abstract void interact(Floor1StormController controller);
+    public abstract void interact(Floor2StormController controller2);
 }
