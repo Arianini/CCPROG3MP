@@ -12,6 +12,7 @@ public class ShopController {
 
     private void initView(){
         view.getBuyButton().addActionListener(e -> purchaseWeapon());
+        view.getBackButton().addActionListener(e -> backButton());
         view.setVisible(true);
     }
 
@@ -34,5 +35,11 @@ public class ShopController {
                 }
             }
         }
+    }
+
+    private void backButton(){
+        view.dispose();
+        GameLobbyController gameLobbyController = new GameLobbyController(model);
+        gameLobbyController.showGameLobby();
     }
 }

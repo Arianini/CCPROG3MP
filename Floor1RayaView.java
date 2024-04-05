@@ -14,9 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
-public class Floor1StormView extends JFrame {
-    private final Floor1StormModel model;
-    private final Floor1StormController controller;
+public class Floor1RayaView extends JFrame {
+    private final Floor1RayaModel model;
+    private final Floor1RayaController controller;
     private JLabel[][] tileLabels;
     private JLabel areaNameLabel;
     private JLabel areaGridLabel;
@@ -27,10 +27,10 @@ public class Floor1StormView extends JFrame {
     //private JLabel systmMsgLabel; wala pa
     private JLabel controlsLabel;
 
-    public Floor1StormView(Floor1StormModel model, Floor1StormController controller) {
+    public Floor1RayaView(Floor1RayaModel model, Floor1RayaController controller) {
         this.model = model;
         this.controller = controller;
-        setTitle("Floor 1 - Stormveil Castle");
+        setTitle("Floor 1 - Raya Lucaria");
         initializeView();
         updateView();
     }

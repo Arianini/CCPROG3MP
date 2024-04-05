@@ -6,6 +6,7 @@ public class FastTravelController {
     private CharacterModel model;
     private GameLobbyController gameLobbyController;
     private Floor1StormController floor1StormController;
+    private Floor1RayaController floor1RayaController;
 
     public FastTravelController(FastTravelView view, CharacterModel model, GameLobbyController gameLobbyController) {
         this.view = view;
@@ -27,18 +28,26 @@ public class FastTravelController {
     private void travelToStormveilCastle() {
         SwingUtilities.invokeLater(() -> {
             Floor1StormModel floor1StormModel = new Floor1StormModel();
-            Floor1StormView floor1StormView = new Floor1StormView(floor1StormModel, floor1StormController);
-            Floor1StormController controller = new Floor1StormController(floor1StormModel, floor1StormView, gameLobbyController);
-            floor1StormView.setVisible(true);
-            view.dispose(); // Close the FastTravelView
+            floor1StormModel.setCharacterModel(model);
+            floor1StormModel.resetTiles(); // Reset tiles before starting
+            SpawnTile spawnTile = new SpawnTile();
+            
+            new Floor1StormController(floor1StormModel, null, gameLobbyController, null);
+            view.setVisible(false); // Hide the lobby view
         });
     }
     
 
     private void travelToRayaLucariaAcademy() {
-        // Implement travel logic here
-        JOptionPane.showMessageDialog(view, "Traveling to Raya Lucaria Academy...");
-        view.dispose();
+        SwingUtilities.invokeLater(() -> {
+            Floor1RayaModel floor1RayaModel = new Floor1RayaModel();
+            floor1RayaModel.setCharacterModel(model);
+            floor1RayaModel.resetTiles(); // Reset tiles before starting
+            SpawnTile spawnTile = new SpawnTile();
+            
+            new Floor1RayaController(floor1RayaModel, null, gameLobbyController, null);
+            view.setVisible(false); // Hide the lobby view
+        });
     }
 
     private void travelToTheEldenThrone() {

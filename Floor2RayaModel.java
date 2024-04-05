@@ -1,9 +1,9 @@
-public class Floor1StormModel extends StormveilCastleFloor {
+public class Floor2RayaModel extends RayaLucariaFloor {
     private Tile[][] tiles;
     private CharacterModel characterModel;
 
-    public Floor1StormModel() {
-        super(7, 3, 6, 1, "Stormveil Castle"); // 7 rows, 3 columns, player starts at (6,1)
+    public Floor2RayaModel() {
+        super(7, 3, 0, 1, "Raya Lucaria Academy"); // 7 rows, 3 columns, player starts at (6,3)
         initializeTiles();
     }
 
@@ -18,15 +18,17 @@ public class Floor1StormModel extends StormveilCastleFloor {
         }
 
         // Set specific tiles based on their position
-        tiles[6][1] = new FastTravelTile();
         tiles[0][1] = new DoorTile();
+        tiles[3][2] = new DoorTile();
         tiles[1][0] = new SpawnTile();
-        tiles[1][2] = new SpawnTile();
-
+        tiles[3][0] = new SpawnTile();
+        tiles[5][0] = new SpawnTile();
+        
         // Set the player's starting tile
         tiles[playerRow][playerColumn] = new PlayerTile();
     }
 
+   
     @Override
     public void movePlayer(int newRow, int newColumn) {
         if (newRow >= 0 && newRow < rows && newColumn >= 0 && newColumn < columns) {
@@ -35,11 +37,10 @@ public class Floor1StormModel extends StormveilCastleFloor {
     
             // Reset the previous tile if necessary
             if (currentTile instanceof PlayerTile && currentTile.hasPlayer()) {
-                if (playerRow == 6 && playerColumn == 1) {
-                    tiles[playerRow][playerColumn] = new FastTravelTile();
-                } else if (playerRow == 0 && playerColumn == 1) {
+                } if ((playerRow == 0 && playerColumn == 1) || (playerRow == 3 && playerColumn == 2)) {
                     tiles[playerRow][playerColumn] = new DoorTile();
-                } else if ((playerRow == 1 && playerColumn == 0) || (playerRow == 1 && playerColumn == 2)) {
+                } else if ((playerRow == 1 && playerColumn == 0) || (playerRow == 3 && playerColumn == 0)
+                            || (playerRow == 5 && playerColumn == 0)) {
                     SpawnTile spawnTile = (SpawnTile) currentTile;
                     // Reset to SpawnTile only if the player has not interacted with it
                     if (!spawnTile.isDisabled()) {
@@ -48,7 +49,7 @@ public class Floor1StormModel extends StormveilCastleFloor {
                 } else {
                     tiles[playerRow][playerColumn] = new DefaultTile();
                 }
-            }
+            
     
             playerRow = newRow;
             playerColumn = newColumn;
@@ -59,7 +60,7 @@ public class Floor1StormModel extends StormveilCastleFloor {
             }
         }
     }
-
+    
     public Tile[][] getTiles() {
         return tiles;
     }
@@ -106,7 +107,8 @@ public class Floor1StormModel extends StormveilCastleFloor {
     public CharacterModel getCharacterModel() {
         return characterModel;
     }
-    
+
+ 
     public void resetTiles() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -116,7 +118,7 @@ public class Floor1StormModel extends StormveilCastleFloor {
             }
         }
     }
-
+   
 
 
 }

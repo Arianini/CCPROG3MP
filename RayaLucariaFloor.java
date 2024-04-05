@@ -1,9 +1,9 @@
-public abstract class StormveilCastleFloor {
+public abstract class RayaLucariaFloor {
     protected int rows, columns;
     protected int playerRow, playerColumn;
     protected String areaName;
 
-    public StormveilCastleFloor(int rows, int columns, int playerStartRow, int playerStartColumn, String areaName) {
+    public RayaLucariaFloor(int rows, int columns, int playerStartRow, int playerStartColumn, String areaName) {
         this.rows = rows;
         this.columns = columns;
         this.playerRow = playerStartRow;

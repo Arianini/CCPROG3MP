@@ -1,9 +1,9 @@
-public class Floor1StormModel extends StormveilCastleFloor {
+public class Floor3RayaModel extends RayaLucariaFloor{
     private Tile[][] tiles;
     private CharacterModel characterModel;
 
-    public Floor1StormModel() {
-        super(7, 3, 6, 1, "Stormveil Castle"); // 7 rows, 3 columns, player starts at (6,1)
+    public Floor3RayaModel() {
+        super(7, 5, 3, 0, "Raya Lucaria Academy"); // 7 rows, 3 columns, player starts at (3,0)
         initializeTiles();
     }
 
@@ -18,11 +18,12 @@ public class Floor1StormModel extends StormveilCastleFloor {
         }
 
         // Set specific tiles based on their position
-        tiles[6][1] = new FastTravelTile();
-        tiles[0][1] = new DoorTile();
-        tiles[1][0] = new SpawnTile();
+        tiles[0][2] = new DoorTile();
+        tiles[3][0] = new DoorTile();
+        tiles[3][4] = new DoorTile();
         tiles[1][2] = new SpawnTile();
-
+        tiles[5][2] = new SpawnTile();
+       
         // Set the player's starting tile
         tiles[playerRow][playerColumn] = new PlayerTile();
     }
@@ -35,17 +36,18 @@ public class Floor1StormModel extends StormveilCastleFloor {
     
             // Reset the previous tile if necessary
             if (currentTile instanceof PlayerTile && currentTile.hasPlayer()) {
-                if (playerRow == 6 && playerColumn == 1) {
-                    tiles[playerRow][playerColumn] = new FastTravelTile();
-                } else if (playerRow == 0 && playerColumn == 1) {
+                if (playerRow == 0 && playerColumn == 2) {
                     tiles[playerRow][playerColumn] = new DoorTile();
-                } else if ((playerRow == 1 && playerColumn == 0) || (playerRow == 1 && playerColumn == 2)) {
+                } else if (playerRow == 3 && playerColumn == 0) {
+                    tiles[playerRow][playerColumn] = new DoorTile();
+                } else if ((playerRow == 1 && playerColumn == 2) || 
+                        (playerRow == 5 && playerColumn == 2)) {
                     SpawnTile spawnTile = (SpawnTile) currentTile;
                     // Reset to SpawnTile only if the player has not interacted with it
                     if (!spawnTile.isDisabled()) {
                         tiles[playerRow][playerColumn] = new SpawnTile();
                     }
-                } else {
+                }else {
                     tiles[playerRow][playerColumn] = new DefaultTile();
                 }
             }
@@ -116,7 +118,5 @@ public class Floor1StormModel extends StormveilCastleFloor {
             }
         }
     }
-
-
 
 }
