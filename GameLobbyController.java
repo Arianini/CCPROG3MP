@@ -21,7 +21,7 @@ public class GameLobbyController {
         view.getInventoryButton().addActionListener(e -> openInventory());
         view.getShopButton().addActionListener(e -> openShop());
         view.getQuitButton().addActionListener(e -> quitGame());
-    }
+    } 
 
     public void showGameLobby() {
         if (view.isVisible()) {
@@ -33,15 +33,13 @@ public class GameLobbyController {
     }
 
     private void fastTravel() {
-        SwingUtilities.invokeLater(() -> {
-            Floor1StormModel floor1StormModel = new Floor1StormModel();
-            floor1StormModel.setCharacterModel(model);
-            floor1StormModel.resetTiles(); // Reset tiles before starting
-            SpawnTile spawnTile = new SpawnTile();
+        // Close the current Game Lobby view when opening the Fast Travel view
+        view.dispose();
 
-            new Floor1StormController(floor1StormModel, null, this);
-            view.setVisible(false); // Hide the lobby view
-        });
+        // Pass the reference of this controller to the Fast Travel view controller
+        FastTravelView fastTravelView = new FastTravelView();
+        FastTravelController fastTravelController = new FastTravelController(fastTravelView, model, this);
+        fastTravelView.setVisible(true);
     }
 
     private void levelUp() {
@@ -63,7 +61,7 @@ public class GameLobbyController {
         SwingUtilities.invokeLater(() -> {
             ShopView shopView = new ShopView();
             ShopController shopController = new ShopController(shopView, model);
-            shopView.displayWeapons(getWeaponsForSale());
+            //shopView.displayWeapons(getWeaponsForSale());
             shopView.setVisible(true);
         });
     }

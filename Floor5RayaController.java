@@ -2,23 +2,23 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
-public class Floor1StormController{
-    private Floor1StormModel model;
-    private Floor1StormView view;
+public class Floor5RayaController{
+    private Floor5RayaModel model;
+    private Floor5RayaView view;
     private GameLobbyController gameLobbyController;
     //private CharacterModel Cmodel;
-    private Floor2StormController floor2StormController;
+    private Floor3RayaController floor3RayaController;
     
 
-    public Floor1StormController(Floor1StormModel model, Floor1StormView view, GameLobbyController gameLobbyController, Floor2StormController floor2StormController) {
+    public Floor5RayaController(Floor5RayaModel model, Floor5RayaView view, GameLobbyController gameLobbyController, Floor3RayaController floor3RayaController) {
         this.model = model;
+        this.view = view;
         this.gameLobbyController = gameLobbyController;
-        this.floor2StormController = floor2StormController;
+        this.floor3RayaController = floor3RayaController;
         
         if (view == null) {
-            this.view = new Floor1StormView(model, this);
+            this.view = new Floor5RayaView(model, this);
         } else {
             this.view = view;
         }
@@ -37,16 +37,13 @@ public class Floor1StormController{
         view.requestFocusInWindow();
     }
 
-    private void travelToStormveilCastle() {
-        SwingUtilities.invokeLater(() -> {
-            Floor1StormModel floor1StormModel = new Floor1StormModel();
-            Floor1StormView floor1StormView = new Floor1StormView(floor1StormModel, this);
-            if (this.view != null) {
-                this.view.dispose();
-            }
-            this.view = floor1StormView;
-            this.view.setVisible(true);
-        });
+    private void showFloor3(){
+        if (view.isVisible()) {
+            view.toFront();
+            view.repaint();
+        } else {
+            view.setVisible(true);
+        }
     }
   
     private void handleKeyPressed(KeyEvent e) {
@@ -69,28 +66,19 @@ public class Floor1StormController{
             currentTile.interact(this);
         }
     }
-    
+
     public void handleFastTravel() {
         view.dispose(); // Dispose the current view
         gameLobbyController.showGameLobby(); // Show the game lobby
     }
     
     public void handleDoorInteraction() {
-        JOptionPane.showMessageDialog(null, "Going to Floor2");
-        SwingUtilities.invokeLater(() -> {
-            Floor2StormModel floor2StormModel = new Floor2StormModel();
-            Floor2StormView floor2StormView = new Floor2StormView(floor2StormModel, null);
-    
-            Floor2StormController floor2StormController = new Floor2StormController(floor2StormModel, floor2StormView, this);
-    
-            floor2StormView.setController(floor2StormController);
-    
-            CharacterModel character = this.model.getCharacterModel();
-    
-            floor2StormController.startFloor2(character);
-    
-            this.view.setVisible(false);
-        });
+        if (floor3RayaController != null) {
+            view.dispose(); // Dispose current Floor 5 view
+            floor3RayaController.showFloor3(); // Show Floor 3 view
+        } else {
+            JOptionPane.showMessageDialog(view, "Error: Cannot return to Floor 3.");
+        }
     }
 
     public void spawnEnemy() {
@@ -110,16 +98,16 @@ public class Floor1StormController{
         new TreasureView(runesGained, character.getRunes());
         view.updateStats();
     }
+    //spawn boss
 
     public int getAreaIndex() {
-        return 1;
+        return 2;
     }
 
-    public void showFloor1() {
-        if (view == null) {
-            view = new Floor1StormView(model, this);
-        }
-
-        view.setVisible(true);
+    public void startFloor5(CharacterModel characterModel){
+        model.setCharacterModel(characterModel);
+        model.resetTiles();
+        showFloor3();
     }
 }
+

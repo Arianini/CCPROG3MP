@@ -14,4 +14,32 @@ public class PlayerTile extends Tile {
     public void interact(Floor1StormController controller) {
         // Interaction for player tile not necessary since the player is here
     }
+
+    public void interact(Floor2StormController controller) {
+        // Interaction for player tile not necessary since the player is here
+    }
+
+    public void interact(Floor3StormController controller) {
+        // Interaction for player tile not necessary since the player is here
+    }
+
+    public void interact(Floor1RayaController controller) {
+        // Interaction for player tile not necessary since the player is here
+    }
+
+    public void interact(Floor2RayaController controller) {
+        // Interaction for player tile not necessary since the player is here
+    }
+
+    public void interact(Floor3RayaController controller) {
+        // Interaction for player tile not necessary since the player is here
+    }
+
+    public void interact(Floor4RayaController controller) {
+        // Interaction for player tile not necessary since the player is here
+    }
+
+    public void interact(Floor5RayaController controller) {
+        // Interaction for player tile not necessary since the player is here
+    }
 }

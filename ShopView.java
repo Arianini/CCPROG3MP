@@ -1,4 +1,5 @@
-
+import java.awt.Font;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -6,6 +7,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.awt.BorderLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -14,10 +16,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
+
 
 public class ShopView extends JFrame{
     private Weapon selectedWeapon;
     private JButton buyButton;
+    private JButton backButton;
     private JPanel panel;
     private JLabel shopLabel;
     private JLabel weaponLabel;
@@ -28,12 +33,14 @@ public class ShopView extends JFrame{
         selectedWeapon = null;
         setTitle("SHOP");
         setSize(500, 400);
-        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
+        
         panel = new JPanel();
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
+        panel.setBackground(Color.BLACK);
         
         shopLabel = new JLabel("Welcome to the Shop");
         gbc.gridx = 0;
@@ -41,26 +48,33 @@ public class ShopView extends JFrame{
         gbc.gridwidth = 2;
         gbc.insets = new Insets(10, 2, 2, 2);
         gbc.anchor = GridBagConstraints.CENTER;
+        shopLabel.setForeground(Color.WHITE);
+        shopLabel.setFont(new Font("Serif", Font.BOLD, 20));
+        shopLabel.setBorder(new EmptyBorder(20, 0, 10, 0));
         panel.add(shopLabel, gbc);
-
-        JLabel swordLabel = new JLabel("SWORDS");
-        gbc.gridy++;
-        panel.add(swordLabel, gbc);
-
-        gbc.gridwidth = 1;
-
-        int imageWidth = 100;
-        int imageHeight = 120;
-        gbc.gridy++;
 
         JLabel weaponLabel = new JLabel("No weapon selected");
         JLabel weaponCostLabel = new JLabel(" ");
         JLabel weaponStatsLabel = new JLabel(" ");
 
+        JLabel swordLabel = new JLabel("SWORDS");
+        gbc.gridy++;
+        //gbc.gridx =0;
+        swordLabel.setForeground(Color.WHITE);
+        swordLabel.setFont(new Font("Serif", Font.BOLD, 20));
+        swordLabel.setBorder(new EmptyBorder(20, 0, 10, 0));
+        panel.add(swordLabel, gbc);
+
+        gbc.gridwidth = 1;
+        int imageWidth = 100;
+        int imageHeight = 120;
+        gbc.gridy++;
+
+
         Weapon[] swords = {
             new Weapon("shortsword.png", new ShortSword()),
             new Weapon("rogiersrapier.png", new RogiersRapier()),
-            new Weapon("codedsword.png", new codedSword()),
+            new Weapon("coded.png", new codedSword()),
             new Weapon("swordofnightandflame.png", new swordOfNightAndFlame()),
         };
 
@@ -100,7 +114,11 @@ public class ShopView extends JFrame{
         JLabel katanaLabel = new JLabel("KATANAS");
         gbc.gridy++;
         gbc.gridx = 0;
+        katanaLabel.setForeground(Color.WHITE);
+        katanaLabel.setFont(new Font("Serif", Font.BOLD, 20));
+        katanaLabel.setBorder(new EmptyBorder(20, 0, 10, 0));
         panel.add(katanaLabel, gbc);
+
 
         Weapon[] katanas = {
             new Weapon("uchigatana.png", new Uchigatana()),
@@ -146,6 +164,9 @@ public class ShopView extends JFrame{
         JLabel whipLabel = new JLabel("WHIPS");
         gbc.gridy++;
         gbc.gridx = 0;
+        whipLabel.setForeground(Color.WHITE);
+        whipLabel.setFont(new Font("Serif", Font.BOLD, 20));
+        whipLabel.setBorder(new EmptyBorder(20, 0, 10, 0));
         panel.add(whipLabel, gbc);
 
         Weapon[] whips = {
@@ -193,6 +214,9 @@ public class ShopView extends JFrame{
         JLabel gswordLabel = new JLabel("GREATSWORDS");
         gbc.gridy++;
         gbc.gridx = 0;
+        gswordLabel.setForeground(Color.WHITE);
+        gswordLabel.setFont(new Font("Serif", Font.BOLD, 20));
+        gswordLabel.setBorder(new EmptyBorder(20, 0, 10, 0));
         panel.add(gswordLabel, gbc);
 
         Weapon[] greatSwords = {
@@ -239,6 +263,9 @@ public class ShopView extends JFrame{
         JLabel stavesLabel = new JLabel("STAVES");
         gbc.gridy++;
         gbc.gridx = 0;
+        stavesLabel.setForeground(Color.WHITE);
+        stavesLabel.setFont(new Font("Serif", Font.BOLD, 20));
+        stavesLabel.setBorder(new EmptyBorder(20, 0, 10, 0));
         panel.add(stavesLabel, gbc);
 
         Weapon[] staves = {
@@ -285,6 +312,9 @@ public class ShopView extends JFrame{
         JLabel sealLabel = new JLabel("SEALS");
         gbc.gridy++;
         gbc.gridx = 0;
+        sealLabel.setForeground(Color.WHITE);
+        sealLabel.setFont(new Font("Serif", Font.BOLD, 20));
+        sealLabel.setBorder(new EmptyBorder(20, 0, 10, 0));
         panel.add(sealLabel, gbc);
 
         Weapon[] seals = {
@@ -325,28 +355,54 @@ public class ShopView extends JFrame{
 
             column++;
         }
-
-        
+     
         gbc.gridy++;
         gbc.gridx = 0;
         gbc.gridwidth = 5;
+        gbc.insets = new Insets(2,0,2,0);
+        weaponLabel.setForeground(Color.WHITE);
+        weaponLabel.setFont(new Font("Serif", Font.BOLD, 15));
+        weaponLabel.setBorder(new EmptyBorder(5, 0, 2, 0));
         panel.add(weaponLabel, gbc);
 
         gbc.gridy++;
         gbc.gridx = 0;
         gbc.gridwidth = 5;
+        gbc.insets = new Insets(2,0,2,0);
+        weaponCostLabel.setForeground(Color.WHITE);
+        weaponCostLabel.setFont(new Font("Serif", Font.BOLD, 15));
+        weaponCostLabel.setBorder(new EmptyBorder(5, 0, 2, 0));
+
         panel.add(weaponCostLabel, gbc);
 
         gbc.gridy++;
         gbc.gridx = 0;
         gbc.gridwidth = 5;
+        gbc.insets = new Insets(2,0,2,0);
+        weaponStatsLabel.setForeground(Color.WHITE);
+        weaponStatsLabel.setFont(new Font("Serif", Font.BOLD, 15));
+        weaponStatsLabel.setBorder(new EmptyBorder(5, 0, 2, 0));
         panel.add(weaponStatsLabel, gbc);
         
         gbc.gridy++;
         buyButton = new JButton("Buy");
         gbc.gridx = 0;
-        gbc.gridwidth = 5;
+        gbc.gridwidth = 3;
+        gbc.insets = new Insets(10,0,0,0);
+        buyButton.setForeground(Color.BLACK);
+        buyButton.setFont(new Font("Arial", Font.BOLD, 15));
+        buyButton.setFocusPainted(false);
         panel.add(buyButton, gbc);
+
+        backButton = new JButton("Back");
+        gbc.gridx = 1;
+        gbc.gridwidth = 4;
+        backButton.setForeground(Color.BLACK);
+        backButton.setFont(new Font("Arial", Font.BOLD, 15));
+        backButton.setFocusPainted(false);
+        panel.add(backButton, gbc);
+
+        
 
         JScrollPane scrollPane = new JScrollPane(panel);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -356,7 +412,7 @@ public class ShopView extends JFrame{
         setVisible(true);
     }
 
-    public void displayWeapons(List<Weapon> weapons) {
+   /* public void displayWeapons(List<Weapon> weapons) {
         panel.removeAll();
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -379,7 +435,7 @@ public class ShopView extends JFrame{
         }
         panel.revalidate();
         panel.repaint();
-    }
+    }*/ 
 
 
     public void addBuybutton(ActionListener listener){
@@ -392,6 +448,13 @@ public class ShopView extends JFrame{
 
     public Weapon getSelectedWeapon() {
         return selectedWeapon;
+    }
+
+    public void addBackButton(ActionListener listener){
+        backButton.addActionListener(listener);
+    }
+    public JButton getBackButton(){
+        return backButton;
     }
 }
 

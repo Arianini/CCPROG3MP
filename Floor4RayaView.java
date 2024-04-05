@@ -14,9 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
-public class Floor1StormView extends JFrame {
-    private final Floor1StormModel model;
-    private final Floor1StormController controller;
+public class Floor4RayaView extends JFrame {
+    private final Floor4RayaModel model;
+    private Floor4RayaController controller;
     private JLabel[][] tileLabels;
     private JLabel areaNameLabel;
     private JLabel areaGridLabel;
@@ -27,10 +27,10 @@ public class Floor1StormView extends JFrame {
     //private JLabel systmMsgLabel; wala pa
     private JLabel controlsLabel;
 
-    public Floor1StormView(Floor1StormModel model, Floor1StormController controller) {
+    public Floor4RayaView(Floor4RayaModel model, Floor4RayaController controller) {
         this.model = model;
         this.controller = controller;
-        setTitle("Floor 1 - Stormveil Castle");
+        setTitle("Floor 4 - Raya Lucaria Academy");
         initializeView();
         updateView();
     }
@@ -53,9 +53,10 @@ public class Floor1StormView extends JFrame {
 
     public void updateStats() {
         CharacterModel character = model.getCharacterModel();
-        healthLabel.setText("Health: " + character.getStats().getHp());
+        healthLabel.setText("Health: " + character.getStats().getHp()); //bug this.health is null
         levelLabel.setText("Level: " + character.getStats().getLevel());
         runesLabel.setText("Runes: " + character.getRunes());
+       
     }
 
     private JPanel createFloorPanel() {
@@ -72,8 +73,8 @@ public class Floor1StormView extends JFrame {
             }
         }
         return floorPanel;
+ 
     }
-
     private JPanel createPlayerStatsPanel() {
         JPanel playerStatsPanel = new JPanel();
         playerStatsPanel.setLayout(new BoxLayout(playerStatsPanel, BoxLayout.Y_AXIS));
@@ -81,16 +82,23 @@ public class Floor1StormView extends JFrame {
     
         areaNameLabel = new JLabel("Area Name: " +model.getAreaName());
         areaGridLabel = new JLabel("Area Grid: "+model.getRows() + "x" +model.getColumns());
+
         CharacterModel character = model.getCharacterModel(); 
-        tockenLabel = new JLabel("Player Tocken: " +character.getPlayerClass().getClass().getSimpleName() + " 'P'");
+        if(character != null){
+       // tockenLabel = new JLabel("Player Tocken: " +character.getPlayerClass().getClass().getSimpleName() + " 'P'");
         healthLabel = new JLabel("Health: " + character.getStats().getHp());
         levelLabel = new JLabel("Level: " + character.getStats().getLevel());
         runesLabel = new JLabel("Runes: " + character.getRunes());
-    
+        }
+        else{
+            healthLabel = new JLabel("Health: ");
+            levelLabel = new JLabel("Level: ");
+            runesLabel = new JLabel("Runes: ");
+        }
         Font labelFont = new Font("Arial", Font.BOLD, 14);
         areaNameLabel.setFont(labelFont);
         areaGridLabel.setFont(labelFont);
-        tockenLabel.setFont(labelFont);
+       // tockenLabel.setFont(labelFont);
         healthLabel.setFont(labelFont);
         levelLabel.setFont(labelFont);
         runesLabel.setFont(labelFont);
@@ -98,7 +106,7 @@ public class Floor1StormView extends JFrame {
     
        areaNameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
        areaGridLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-       tockenLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+       //tockenLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         healthLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         levelLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         runesLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -120,8 +128,8 @@ public class Floor1StormView extends JFrame {
         playerStatsPanel.add(Box.createVerticalStrut(5)); // Spacer
         playerStatsPanel.add(areaGridLabel);
         playerStatsPanel.add(Box.createVerticalStrut(5)); // Spacer
-        playerStatsPanel.add(tockenLabel);
-        playerStatsPanel.add(Box.createVerticalStrut(5)); // Spacer
+        //playerStatsPanel.add(tockenLabel);
+        //playerStatsPanel.add(Box.createVerticalStrut(5)); // Spacer
         playerStatsPanel.add(healthLabel);
         playerStatsPanel.add(Box.createVerticalStrut(5)); // Spacer
         playerStatsPanel.add(levelLabel);
@@ -132,60 +140,8 @@ public class Floor1StormView extends JFrame {
     
         return playerStatsPanel;
     }
-
-    /*private JPanel createPlayerStatsPanel() {
-        JPanel playerStatsPanel = new JPanel(new GridLayout(1,2));
-       // playerStatsPanel.setLayout(new BoxLayout(playerStatsPanel, BoxLayout.Y_AXIS));
-        playerStatsPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+ 
     
-        JPanel leftPanel = new JPanel();
-        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
-        leftPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
-
-        areaNameLabel = new JLabel("Area Name: " +model.getAreaName());
-        areaGridLabel = new JLabel("Area Grid: "+model.getRows() + "x" +model.getColumns());
-        CharacterModel character = model.getCharacterModel(); 
-        tockenLabel = new JLabel("Player Tocken: " +character.getPlayerClass().getClass().getSimpleName() + " 'P'");
-        healthLabel = new JLabel("Health: " + character.getStats().getHp());
-        levelLabel = new JLabel("Level: " + character.getStats().getLevel());
-        runesLabel = new JLabel("Runes: " + character.getRunes());
-    
-        Font labelFont = new Font("Arial", Font.BOLD, 14);
-        areaNameLabel.setFont(labelFont);
-        areaGridLabel.setFont(labelFont);
-        tockenLabel.setFont(labelFont);
-        healthLabel.setFont(labelFont);
-        levelLabel.setFont(labelFont);
-        runesLabel.setFont(labelFont);
-       // systemmsgLabel.setFont(labelFont); //where to get
-    
-        leftPanel.add(areaNameLabel);
-        leftPanel.add(Box.createVerticalStrut(4));
-        leftPanel.add(areaGridLabel);
-        leftPanel.add(Box.createVerticalStrut(4));
-        leftPanel.add(tockenLabel);
-        leftPanel.add(Box.createVerticalStrut(4));
-        leftPanel.add(healthLabel);
-        leftPanel.add(Box.createVerticalStrut(4));
-        leftPanel.add(levelLabel);
-        leftPanel.add(Box.createVerticalStrut(4));
-        leftPanel.add(runesLabel);
-        leftPanel.add(Box.createVerticalStrut(4));
-
-        JPanel rightPanel = new JPanel();
-        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
-    
-        JLabel controlInstructions = new JLabel(
-            "<html><div style='text-align: center;'>Controls:<br/>W - Up<br/>A - Left<br/>S - Down<br/>D - Right<br/>E - Interact</div></html>",
-            SwingConstants.CENTER);
-        controlInstructions.setFont(new Font("Arial", Font.PLAIN, 12));
-
-        rightPanel.add(controlInstructions);
-        playerStatsPanel.add(leftPanel);
-        playerStatsPanel.add(rightPanel);
-
-        return playerStatsPanel;
-    }*/
     private JPanel createControlPanel() {
         JPanel controlPanel = new JPanel(new GridLayout(1, 4));
         String[] controls = {"A", "W", "S", "D"};
@@ -200,7 +156,7 @@ public class Floor1StormView extends JFrame {
 
         return controlPanel;
     }
-
+    
 
     private void handleControlAction(String control) {
         int currentRow = model.getPlayerRow();
@@ -249,6 +205,9 @@ public class Floor1StormView extends JFrame {
             }
         }
     }
-    
-}
+    public void setController(Floor4RayaController controller) {
+        this.controller = controller;
+    }
 
+
+}

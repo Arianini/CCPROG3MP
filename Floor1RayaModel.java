@@ -1,9 +1,9 @@
-public class Floor1StormModel extends StormveilCastleFloor {
+public class Floor1RayaModel extends StormveilCastleFloor {
     private Tile[][] tiles;
     private CharacterModel characterModel;
 
-    public Floor1StormModel() {
-        super(7, 3, 6, 1, "Stormveil Castle"); // 7 rows, 3 columns, player starts at (6,1)
+    public Floor1RayaModel() {
+        super(5, 5, 0, 2, "Raya Lucaria Academy"); // 5 rows, 5 columns, player starts at (6,1)
         initializeTiles();
     }
 
@@ -18,10 +18,10 @@ public class Floor1StormModel extends StormveilCastleFloor {
         }
 
         // Set specific tiles based on their position
-        tiles[6][1] = new FastTravelTile();
-        tiles[0][1] = new DoorTile();
-        tiles[1][0] = new SpawnTile();
-        tiles[1][2] = new SpawnTile();
+        tiles[0][2] = new FastTravelTile();
+        tiles[4][2] = new DoorTile();
+        tiles[3][1] = new SpawnTile();
+        tiles[3][3] = new SpawnTile();
 
         // Set the player's starting tile
         tiles[playerRow][playerColumn] = new PlayerTile();
@@ -35,11 +35,11 @@ public class Floor1StormModel extends StormveilCastleFloor {
     
             // Reset the previous tile if necessary
             if (currentTile instanceof PlayerTile && currentTile.hasPlayer()) {
-                if (playerRow == 6 && playerColumn == 1) {
+                if (playerRow == 0 && playerColumn == 2) {
                     tiles[playerRow][playerColumn] = new FastTravelTile();
-                } else if (playerRow == 0 && playerColumn == 1) {
+                } else if (playerRow == 4 && playerColumn == 2) {
                     tiles[playerRow][playerColumn] = new DoorTile();
-                } else if ((playerRow == 1 && playerColumn == 0) || (playerRow == 1 && playerColumn == 2)) {
+                } else if ((playerRow == 3 && playerColumn == 1) || (playerRow == 3 && playerColumn == 3)) {
                     SpawnTile spawnTile = (SpawnTile) currentTile;
                     // Reset to SpawnTile only if the player has not interacted with it
                     if (!spawnTile.isDisabled()) {

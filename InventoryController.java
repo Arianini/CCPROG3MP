@@ -40,8 +40,8 @@ public class InventoryController {
     }
 
     private void goBack() {
+        view.dispose();
         GameLobbyController gameLobbyController = new GameLobbyController(model);
         gameLobbyController.showGameLobby();
-        view.dispose();
     }
 }

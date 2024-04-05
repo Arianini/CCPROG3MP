@@ -4,21 +4,21 @@ import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-public class Floor1StormController{
-    private Floor1StormModel model;
-    private Floor1StormView view;
+public class Floor1RayaController{
+    private Floor1RayaModel model;
+    private Floor1RayaView view;
     private GameLobbyController gameLobbyController;
     //private CharacterModel Cmodel;
-    private Floor2StormController floor2StormController;
+    private Floor2RayaController floor2RayaController;
     
 
-    public Floor1StormController(Floor1StormModel model, Floor1StormView view, GameLobbyController gameLobbyController, Floor2StormController floor2StormController) {
+    public Floor1RayaController(Floor1RayaModel model, Floor1RayaView view, GameLobbyController gameLobbyController, Floor2RayaController floor2RayaController) {
         this.model = model;
         this.gameLobbyController = gameLobbyController;
-        this.floor2StormController = floor2StormController;
+        this.floor2RayaController = floor2RayaController;
         
         if (view == null) {
-            this.view = new Floor1StormView(model, this);
+            this.view = new Floor1RayaView(model, this);
         } else {
             this.view = view;
         }
@@ -37,18 +37,18 @@ public class Floor1StormController{
         view.requestFocusInWindow();
     }
 
-    private void travelToStormveilCastle() {
+    private void travelToRayaLucaria() {
         SwingUtilities.invokeLater(() -> {
-            Floor1StormModel floor1StormModel = new Floor1StormModel();
-            Floor1StormView floor1StormView = new Floor1StormView(floor1StormModel, this);
+            Floor1RayaModel floor1RayaModel = new Floor1RayaModel();
+            Floor1RayaView floor1RayaView = new Floor1RayaView(floor1RayaModel, this);
             if (this.view != null) {
                 this.view.dispose();
             }
-            this.view = floor1StormView;
+            this.view = floor1RayaView;
             this.view.setVisible(true);
         });
     }
-  
+
     private void handleKeyPressed(KeyEvent e) {
         int newRow = model.getPlayerRow();
         int newCol = model.getPlayerColumn();
@@ -78,16 +78,18 @@ public class Floor1StormController{
     public void handleDoorInteraction() {
         JOptionPane.showMessageDialog(null, "Going to Floor2");
         SwingUtilities.invokeLater(() -> {
-            Floor2StormModel floor2StormModel = new Floor2StormModel();
-            Floor2StormView floor2StormView = new Floor2StormView(floor2StormModel, null);
+            Floor2RayaModel floor2RayaModel = new Floor2RayaModel();
+            Floor2RayaView floor2RayaView = new Floor2RayaView(floor2RayaModel, null);
     
-            Floor2StormController floor2StormController = new Floor2StormController(floor2StormModel, floor2StormView, this);
+            Floor2RayaController floor2RayaController = new Floor2RayaController(floor2RayaModel, floor2RayaView, this, gameLobbyController);
     
-            floor2StormView.setController(floor2StormController);
+            floor2RayaView.setController(floor2RayaController);
+
+            floor2RayaView.setVisible(true);
     
             CharacterModel character = this.model.getCharacterModel();
     
-            floor2StormController.startFloor2(character);
+            floor2RayaController.startFloor2(character);
     
             this.view.setVisible(false);
         });
@@ -112,12 +114,12 @@ public class Floor1StormController{
     }
 
     public int getAreaIndex() {
-        return 1;
+        return 2;
     }
 
     public void showFloor1() {
         if (view == null) {
-            view = new Floor1StormView(model, this);
+            view = new Floor1RayaView(model, this);
         }
 
         view.setVisible(true);
