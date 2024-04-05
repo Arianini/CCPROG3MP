@@ -1,4 +1,4 @@
-public class Floor1RayaModel extends StormveilCastleFloor {
+public class Floor1RayaModel extends RayaLucariaFloor {
     private Tile[][] tiles;
     private CharacterModel characterModel;
 
@@ -116,7 +116,4 @@ public class Floor1RayaModel extends StormveilCastleFloor {
             }
         }
     }
-
-
-
 }

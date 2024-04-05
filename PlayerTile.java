@@ -42,4 +42,14 @@ public class PlayerTile extends Tile {
     public void interact(Floor5RayaController controller) {
         // Interaction for player tile not necessary since the player is here
     }
+
+    public void interact(Floor1EldenController controller) {
+        // Interaction for player tile not necessary since the player is here
+    }
+    public void interact(Floor2EldenController controller) {
+        // Interaction for player tile not necessary since the player is here
+    }
+    public void interact(Floor3EldenController controller) {
+        // Interaction for player tile not necessary since the player is here
+    }
 }

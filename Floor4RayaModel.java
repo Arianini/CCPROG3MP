@@ -40,7 +40,7 @@ public class Floor4RayaModel extends RayaLucariaFloor {
                 } if (playerRow == 1 && playerColumn == 0) {
                     tiles[playerRow][playerColumn] = new DoorTile();
                 } else if ((playerRow == 0 && playerColumn == 2) || (playerRow == 0 && playerColumn == 4)
-                            || (playerRow == 1 && playerColumn == 2) || (playerRow == 1 && playerColumn == 4)) {
+                            || (playerRow == 2 && playerColumn == 2) || (playerRow == 2 && playerColumn == 4)) {
                     SpawnTile spawnTile = (SpawnTile) currentTile;
                     // Reset to SpawnTile only if the player has not interacted with it
                     if (!spawnTile.isDisabled()) {

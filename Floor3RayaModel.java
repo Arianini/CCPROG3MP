@@ -23,6 +23,15 @@ public class Floor3RayaModel extends RayaLucariaFloor{
         tiles[3][4] = new DoorTile();
         tiles[1][2] = new SpawnTile();
         tiles[5][2] = new SpawnTile();
+        tiles[0][0] = new EmptyTile();
+        tiles[1][0] = new EmptyTile();
+        tiles[5][0] = new EmptyTile();
+        tiles[6][0] = new EmptyTile();
+        tiles[0][4] = new EmptyTile();
+        tiles[1][4] = new EmptyTile();
+        tiles[5][4] = new EmptyTile();
+        tiles[6][4] = new EmptyTile();
+
        
         // Set the player's starting tile
         tiles[playerRow][playerColumn] = new PlayerTile();
@@ -30,7 +39,7 @@ public class Floor3RayaModel extends RayaLucariaFloor{
 
     @Override
     public void movePlayer(int newRow, int newColumn) {
-        if (newRow >= 0 && newRow < rows && newColumn >= 0 && newColumn < columns) {
+        if (newRow >= 0 && newRow < rows && newColumn >= 0 && newColumn < columns && !(tiles[newRow][newColumn] instanceof EmptyTile)) {
             Tile currentTile = tiles[playerRow][playerColumn];
             Tile destinationTile = tiles[newRow][newColumn];
     

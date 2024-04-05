@@ -25,4 +25,7 @@ public abstract class Tile {
     public abstract void interact(Floor3RayaController controller6);
     public abstract void interact(Floor4RayaController controller7);
     public abstract void interact(Floor5RayaController controller8);
+    public abstract void interact(Floor1EldenController controller9);
+    public abstract void interact(Floor2EldenController controller10);
+    public abstract void interact(Floor3EldenController controller11);
 }

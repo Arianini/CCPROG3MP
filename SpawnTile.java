@@ -45,6 +45,7 @@ public class SpawnTile extends Tile {
         }
     }
 
+    @Override
     public void interact(Floor3StormController controller3) {
         if (!isDisabled) {
             int chance = random.nextInt(100);
@@ -59,6 +60,7 @@ public class SpawnTile extends Tile {
         }
     }
 
+    @Override
     public void interact(Floor1RayaController controller4) {
         if (!isDisabled) {
             int chance = random.nextInt(100);
@@ -73,6 +75,8 @@ public class SpawnTile extends Tile {
         }
     }
 
+  
+    @Override
     public void interact(Floor2RayaController controller5) {
         if (!isDisabled) {
             int chance = random.nextInt(100);
@@ -86,7 +90,7 @@ public class SpawnTile extends Tile {
             isDisabled = true; // Disable this tile so it cannot be interacted with again
         }
     }
-
+    @Override
     public void interact(Floor3RayaController controller6) {
         if (!isDisabled) {
             int chance = random.nextInt(100);
@@ -100,7 +104,7 @@ public class SpawnTile extends Tile {
             isDisabled = true; // Disable this tile so it cannot be interacted with again
         }
     }
-
+    @Override
     public void interact(Floor4RayaController controller7) {
         if (!isDisabled) {
             int chance = random.nextInt(100);
@@ -114,7 +118,7 @@ public class SpawnTile extends Tile {
             isDisabled = true; // Disable this tile so it cannot be interacted with again
         }
     }
-
+    @Override
     public void interact(Floor5RayaController controller8) {
         if (!isDisabled) {
             int chance = random.nextInt(100);
@@ -124,6 +128,48 @@ public class SpawnTile extends Tile {
             } else {
                 // There's a 25% chance to spawn treasure
                 controller8.spawnTreasure();
+            }
+            isDisabled = true; // Disable this tile so it cannot be interacted with again
+        }
+    }
+    @Override
+    public void interact(Floor1EldenController controller9) {
+        if (!isDisabled) {
+            int chance = random.nextInt(100);
+            if (chance < 75) {
+                // There's a 75% chance to spawn an enemy
+                controller9.spawnEnemy();
+            } else {
+                // There's a 25% chance to spawn treasure
+                controller9.spawnTreasure();
+            }
+            isDisabled = true; // Disable this tile so it cannot be interacted with again
+        }
+    }
+    @Override
+    public void interact(Floor2EldenController controller10) {
+        if (!isDisabled) {
+            int chance = random.nextInt(100);
+            if (chance < 75) {
+                // There's a 75% chance to spawn an enemy
+                controller10.spawnEnemy();
+            } else {
+                // There's a 25% chance to spawn treasure
+                controller10.spawnTreasure();
+            }
+            isDisabled = true; // Disable this tile so it cannot be interacted with again
+        }
+    }
+    @Override
+    public void interact(Floor3EldenController controller11) {
+        if (!isDisabled) {
+            int chance = random.nextInt(100);
+            if (chance < 75) {
+                // There's a 75% chance to spawn an enemy
+                controller11.spawnEnemy();
+            } else {
+                // There's a 25% chance to spawn treasure
+                controller11.spawnTreasure();
             }
             isDisabled = true; // Disable this tile so it cannot be interacted with again
         }

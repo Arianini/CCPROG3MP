@@ -51,9 +51,15 @@ public class FastTravelController {
     }
 
     private void travelToTheEldenThrone() {
-        // Implement travel logic here
-        JOptionPane.showMessageDialog(view, "Traveling to The Elden Throne...");
-        view.dispose();
+        SwingUtilities.invokeLater(() -> {
+            Floor1EldenModel floor1EldenModel = new Floor1EldenModel();
+            floor1EldenModel.setCharacterModel(model);
+            floor1EldenModel.resetTiles(); // Reset tiles before starting
+            SpawnTile spawnTile = new SpawnTile();
+            
+            new Floor1EldenController(floor1EldenModel, null, gameLobbyController, null);
+            view.setVisible(false); // Hide the lobby view
+        });
     }
 
     private void goBackToGameLobby() {

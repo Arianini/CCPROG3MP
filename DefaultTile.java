@@ -42,4 +42,16 @@ public class DefaultTile extends Tile {
     public void interact(Floor5RayaController controller8) {
         // No specific interaction for default tile on Floor 2
     }
+
+    public void interact(Floor1EldenController controller8) {
+        // No specific interaction for default tile on Floor 2
+    }
+
+    public void interact(Floor2EldenController controller9) {
+        // No specific interaction for default tile on Floor 2
+    }
+
+    public void interact(Floor3EldenController controller10) {
+        // No specific interaction for default tile on Floor 2
+    }
 }

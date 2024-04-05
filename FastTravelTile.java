@@ -40,4 +40,15 @@ public class FastTravelTile extends Tile {
     public void interact(Floor5RayaController controller8) {
         controller8.handleFastTravel();
     }
+
+    public void interact(Floor1EldenController controller9){
+        controller9.handleFastTravel();
+    }
+
+    public void interact(Floor2EldenController controller10) {
+        //Do nothing
+    }
+    public void interact(Floor3EldenController controller11) {
+        //Do nothing
+    }
 }
